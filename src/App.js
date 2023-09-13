@@ -15,7 +15,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="profil/:id" element={<Profil />} />
+        <Route path="/profil/:id" element={<Profil />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/community" element={<Community />} />
         <Route path="*" element={<Error404 />} />

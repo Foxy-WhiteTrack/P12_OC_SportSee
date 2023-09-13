@@ -1,0 +1,21 @@
+.header {
+    width: 100%;
+    height: 91px;
+    background-color: black;
+    color: white;
+}
+
+.nav {
+    padding: 0 40px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+}
