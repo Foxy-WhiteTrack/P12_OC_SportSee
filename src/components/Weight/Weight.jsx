@@ -1,7 +1,7 @@
 import React from 'react';
-import './SideBar.css';
+import './Weight.css';
 
-export default function SideBar() {
+export default function Weight() {
     return (
         <>
 

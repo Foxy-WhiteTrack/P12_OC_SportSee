@@ -1,7 +1,7 @@
 import React from 'react';
-import './SideBar.css';
+import './FoodStats.css';
 
-export default function SideBar() {
+export default function FoodStats() {
     return (
         <>
 
