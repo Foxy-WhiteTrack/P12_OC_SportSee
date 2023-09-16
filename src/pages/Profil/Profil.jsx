@@ -3,9 +3,22 @@ import { useParams } from 'react-router-dom';
 import './Profil.css';
 import { getUserDataById } from '../../api/callApi.js';
 
+import { RadialBarChart, RadialBar, Legend } from 'recharts';
+
+
 export default function Profil() {
     const { id } = useParams();
     const [userData, setUserData] = useState({});
+
+    const radialData = [
+        { name: 'Score', value: userData.todayScore ? userData.todayScore * 100 : 0 },
+    ];
+
+    const scorePercentage = userData.todayScore ? userData.todayScore * 100 : 0;
+    const startAngle = 0;
+    const endAngle = (scorePercentage / 100) * 360;
+
+
 
     useEffect(() => {
         async function fetchData() {
@@ -37,7 +50,33 @@ export default function Profil() {
 
                 </div>
                 <div className='score'>
+                    <div className='title-score'>
+                        <p className=''>Score</p>
+                    </div>
+                    <div className='donut-score'>
+                        <RadialBarChart
+                            width={200}
+                            height={200}
+                            cx={100}
+                            cy={100}
+                            innerRadius={40}
+                            outerRadius={80}
+                            barSize={8}
+                            data={radialData}
+                            label={() => ''}
+                            startAngle={startAngle}
+                            endAngle={endAngle}
+                        >
+                            <RadialBar minAngle={15} background dataKey='value' fill='#FF0000' />
+                            <Legend iconSize={0} />
+                        </RadialBarChart>
 
+                    </div>
+
+                    <div className='results-score'>
+                        <p className='data-score'>{userData.todayScore ? userData.todayScore * 100 : ''} %</p>
+                        <p className='text-score'>de votre objectif</p>
+                    </div>
                 </div>
             </div>
 
