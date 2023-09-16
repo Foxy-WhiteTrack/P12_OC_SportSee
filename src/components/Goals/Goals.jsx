@@ -16,7 +16,6 @@ export default function Goals({ userId }) {
                 console.error('Erreur lors de la récupération des données :', error);
             }
         }
-
         fetchData();
     }, [userId]);
 
