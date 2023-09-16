@@ -10,7 +10,6 @@ export default function Profil() {
     useEffect(() => {
         async function fetchData() {
             try {
-
                 const user = await getUserDataById(id);
                 setUserData(user);
             } catch (error) {
@@ -23,9 +22,54 @@ export default function Profil() {
 
     return (
         <>
-            <div className='profil'>
-                <h1 className='profile__hello'>Bonjour <span>{userData.userInfos ? userData.userInfos.firstName : ''}</span></h1>
-                <p className='profile__congrats'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
+            <div className='welcome'>
+                <h1 className='hello'>Bonjour <span>{userData.userInfos ? userData.userInfos.firstName : ''}</span></h1>
+                <p className='congrats'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
+            </div>
+            <div className='weight'>
+
+            </div>
+            <div className='datas-perf'>
+                <div className='objectifs'>
+
+                </div>
+                <div className='radar'>
+
+                </div>
+                <div className='score'>
+
+                </div>
+            </div>
+
+            <div className='nutriments'>
+                <div className='kcal'>
+                    <div className='icon-kcal'>
+
+                    </div>
+                    <p className='nbr-kcal'>{userData.keyData ? userData.keyData.calorieCount : ''}</p>
+                    <p>Calories</p>
+                </div>
+                <div className='protein'>
+                    <div className='icon-protein'>
+
+                    </div>
+                    <p className='nbr-protein'>{userData.keyData ? userData.keyData.proteinCount : ''}</p>
+                    <p>Proteines</p>
+                </div>
+                <div className='glucides'>
+                    <div className='icon-glucides'>
+
+                    </div>
+                    <p className='nbr-glucides'>{userData.keyData ? userData.keyData.carbohydrateCount : ''}</p>
+                    <p>Glucides</p>
+                </div>
+                <div className='lipides'>
+                    <div className='icon-lipides'>
+
+                    </div>
+                    <p className='nbr-lipides'>{userData.keyData ? userData.keyData.lipidCount : ''}</p>
+                    <p>Lipides</p>
+                </div>
             </div>
         </>
     );
