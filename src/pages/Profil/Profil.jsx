@@ -25,8 +25,6 @@ export default function Profil() {
 
                 const performanceApiResponse = await getUserPerformanceDataById(id);
 
-                //toDo:  ici, vérifier que le contenu de performanceApiResponse est correct!
-
                 const performanceData = Object.keys(performanceApiResponse.kind).map(kindId => {
                     const subject = performanceApiResponse.kind[kindId];
                     const dataItem = performanceApiResponse.data.find(item => item.kind === parseInt(kindId));
@@ -49,7 +47,6 @@ export default function Profil() {
             }
         }
 
-
         fetchData();
     }, [id]);
 
@@ -67,25 +64,7 @@ export default function Profil() {
 
                 </div>
                 <div className='radar'>
-                    <RadarChart
-                        cx={300}
-                        cy={250}
-                        outerRadius={150}
-                        width={500}
-                        height={500}
-                        data={performanceData}
-                    >
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey="subject" />
-                        <PolarRadiusAxis />
-                        <Radar
-                            name="Mike"
-                            dataKey="A"
-                            stroke="#8884d8"
-                            fill="#8884d8"
-                            fillOpacity={0.6}
-                        />
-                    </RadarChart>
+                    <SimpleRadarChart data={performanceData} />
                 </div>
                 <div className='score'>
                     <Goals userId={id} />
