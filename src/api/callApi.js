@@ -12,3 +12,16 @@ export const getUserDataById = async (id) => {
         throw error;
     }
 };
+
+
+export const getUserPerformanceDataById = async (userId) => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/${userId}/performance`);
+        const data = await response.json(); // retourne un tableau contenant un objet utilisateur
+        return data.data;
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données de performance utilisateur :', error);
+        throw error;
+    }
+};
+
