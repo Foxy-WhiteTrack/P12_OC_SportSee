@@ -1,0 +1,32 @@
+.container-all {
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome {
+    width: 100%;
+}
+
+.container-down {
+    display: flex;
+}
+
+.down-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.down-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.left-up {
+    display: flex;
+}
+
+.left-down {
+    display: flex;
+    justify-content: space-between;
+}

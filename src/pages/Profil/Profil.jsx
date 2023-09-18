@@ -70,27 +70,38 @@ export default function Profil() {
 
     return (
         <>
-            <div className='welcome'>
-                <h1 className='hello'>Bonjour <span>{userData.userInfos ? userData.userInfos.firstName : ''}</span></h1>
-                <p className='congrats'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
-            </div>
-            <div className='weight'>
-                <Weight data={activitySession} />
-            </div>
-            <div className='datas-perf'>
-                <div className='objectifs' id='content'>
-                    <Goals data={formattedSessionData} />
+            <div className='container-all'>
+                <div className='welcome'>
+                    <h1 className='hello'>Bonjour <span>{userData.userInfos ? userData.userInfos.firstName : ''}</span></h1>
+                    <p className='congrats'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
                 </div>
-                <div className='radar'>
-                    <SimpleRadarChart data={performanceData} />
+                <div className='container-down'>
+                    <div className='down-left'>
+                        <div className='left-up'>
+                            <div className='weight'>
+                                <Weight data={activitySession} />
+                            </div>
+                        </div>
+                        <div className='left-down'>
+                            <div className='datas-perf'>
+                                <div className='objectifs' id='content'>
+                                    <Goals data={formattedSessionData} />
+                                </div>
+                                <div className='radar'>
+                                    <SimpleRadarChart data={performanceData} />
+                                </div>
+                                <div className='score'>
+                                    <Kpi userId={id} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='down-right'>
+                        <div className='nutriments'>
+                            <FoodStats userId={id} />
+                        </div>
+                    </div>
                 </div>
-                <div className='score'>
-                    <Kpi userId={id} />
-                </div>
-            </div>
-
-            <div className='nutriments'>
-                <FoodStats userId={id} />
             </div>
         </>
     );
