@@ -17,7 +17,7 @@ export const getUserDataById = async (id) => {
 export const getUserPerformanceDataById = async (userId) => {
     try {
         const response = await fetch(`${BASE_URL}/user/${userId}/performance`);
-        const data = await response.json(); // retourne un tableau contenant un objet utilisateur
+        const data = await response.json(); // retourne un objet utilisateur
         return data.data;
     } catch (error) {
         console.error('Erreur lors de la récupération des données de performance utilisateur :', error);
@@ -25,3 +25,13 @@ export const getUserPerformanceDataById = async (userId) => {
     }
 };
 
+export const getUserGoalsDataById = async (userId) => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/${userId}/average-sessions`);
+        const data = await response.json(); // retourne un objet utilisateur
+        return data.data;
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données de sessions utilisateur :', error);
+        throw error;
+    }
+};
