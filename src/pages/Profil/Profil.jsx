@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Profil.css';
-import { getUserDataById, getUserPerformanceDataById, getUserGoalsDataById } from '../../api/callApi.js';
+import { getUserDataById, getUserPerformanceDataById, getUserGoalsDataById, getUserWeightDataById } from '../../api/callApi.js';
 
 import Goals from '../../components/Goals/Goals';
 import FoodStats from '../../components/FoodStats/FoodStats';
 import SimpleRadarChart from '../../components/SimpleRadarChart/SimpleRadarChart';
 import Kpi from '../../components/Kpi/Kpi';
+import Weight from '../../components/Weight/Weight';
 
 export default function Profil() {
     const { id } = useParams();
     const [userData, setUserData] = useState({});
     const [performanceData, setPerformanceData] = useState([]);
     const [formattedSessionData, setSessionAverageData] = useState([]);
+    const [activitySession, setWeightData] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
@@ -22,6 +24,7 @@ export default function Profil() {
 
                 const performanceApiResponse = await getUserPerformanceDataById(id);
                 const sessionAverageApiResponse = await getUserGoalsDataById(id);
+                const weightData = await getUserWeightDataById(id);
 
                 const performanceData = Object.keys(performanceApiResponse.kind).map(kindId => {
                     const subject = performanceApiResponse.kind[kindId];
@@ -47,13 +50,15 @@ export default function Profil() {
                     sessionLength: session.sessionLength
                 }));
 
+                const activitySession = weightData.sessions;
+
 
                 if (!performanceData || !formattedSessionData) {
                     console.error("Les données de performance sont manquantes ou incorrectes.");
                 } else {
                     setPerformanceData(performanceData);
                     setSessionAverageData(formattedSessionData);
-                    console.log(formattedSessionData);
+                    setWeightData(activitySession);
                 }
             } catch (error) {
                 console.error("Erreur lors de la récupération des données :", error);
@@ -70,7 +75,7 @@ export default function Profil() {
                 <p className='congrats'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
             </div>
             <div className='weight'>
-
+                <Weight data={activitySession} />
             </div>
             <div className='datas-perf'>
                 <div className='objectifs' id='content'>

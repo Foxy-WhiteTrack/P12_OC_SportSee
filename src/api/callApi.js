@@ -35,3 +35,14 @@ export const getUserGoalsDataById = async (userId) => {
         throw error;
     }
 };
+
+export const getUserWeightDataById = async (userId) => {
+    try {
+        const response = await fetch(`${BASE_URL}/user/${userId}/activity`);
+        const data = await response.json(); // retourne un objet utilisateur
+        return data.data;
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données de l\'activité utilisateur :', error);
+        throw error;
+    }
+};
