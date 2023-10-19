@@ -11,18 +11,26 @@ export default function SideBar() {
             <div className='sidebar-ctn'>
                 <aside className="sidebar">
                     <div className='icons'>
-                        <div className='icon'>
-                            <YogaIcon />
-                        </div>
-                        <div className='icon'>
-                            <SwimIcon />
-                        </div>
-                        <div className='icon'>
-                            <CyclingIcon />
-                        </div>
-                        <div className='icon'>
-                            <DumbbellsIcon />
-                        </div>
+                        <a href="#">
+                            <div className='icon'>
+                                <YogaIcon />
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div className='icon'>
+                                <SwimIcon />
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div className='icon'>
+                                <CyclingIcon />
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div className='icon'>
+                                <DumbbellsIcon />
+                            </div>
+                        </a>
                     </div>
                     <div className='reversed'>
                         <p className='txt-reversed'>Copiryght, SportSee 2020</p>

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Profil.css';
-import { getUserDataById, getUserPerformanceDataById, getUserGoalsDataById, getUserWeightDataById } from '../../api/callApi.js';
+// Importer les fonctions d'appel API
+import {
+    getUserDataById,
+    getUserPerformanceDataById,
+    getUserGoalsDataById,
+    getUserWeightDataById
+} from '../../services/callApi.js';
 
 import Goals from '../../components/Goals/Goals';
 import FoodStats from '../../components/FoodStats/FoodStats';
@@ -9,56 +15,46 @@ import SimpleRadarChart from '../../components/SimpleRadarChart/SimpleRadarChart
 import Kpi from '../../components/Kpi/Kpi';
 import Weight from '../../components/Weight/Weight';
 
+// Importer les fonctions de formatage
+import {
+    formatPerformanceData,
+    formatAverageSessionData,
+    formatActivityData
+} from '../../utils/formatData.js';
+
 export default function Profil() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({});
     const [performanceData, setPerformanceData] = useState([]);
     const [formattedSessionData, setSessionAverageData] = useState([]);
     const [activitySession, setWeightData] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const user = await getUserDataById(id);
+                if (user.error) {
+                    navigate('/error404');
+                }
                 setUserData(user);
 
                 const performanceApiResponse = await getUserPerformanceDataById(id);
                 const sessionAverageApiResponse = await getUserGoalsDataById(id);
                 const weightData = await getUserWeightDataById(id);
 
-                const performanceData = Object.keys(performanceApiResponse.kind).map(kindId => {
-                    const subject = performanceApiResponse.kind[kindId];
-                    const dataItem = performanceApiResponse.data.find(item => item.kind === parseInt(kindId));
-                    return {
-                        subject,
-                        A: dataItem ? dataItem.value : 0
-                    };
-                });
+                // Utiliser les fonctions de formatage pour mettre en forme les données
+                const formattedPerformanceData = formatPerformanceData(performanceApiResponse);
+                const formattedSessionData = formatAverageSessionData(sessionAverageApiResponse);
+                const formattedActivitySession = formatActivityData(weightData);
 
-                const dayMap = {
-                    1: "L",
-                    2: "M",
-                    3: "M",
-                    4: "J",
-                    5: "V",
-                    6: "S",
-                    7: "D"
-                };
-
-                const formattedSessionData = sessionAverageApiResponse.sessions.map(session => ({
-                    day: dayMap[session.day],
-                    sessionLength: session.sessionLength
-                }));
-
-                const activitySession = weightData.sessions;
-
-
-                if (!performanceData || !formattedSessionData) {
-                    console.error("Les données de performance sont manquantes ou incorrectes.");
+                if (!formattedPerformanceData || !formattedSessionData) {
+                    console.error("Les données sont manquantes ou incorrectes.");
                 } else {
-                    setPerformanceData(performanceData);
+                    setPerformanceData(formattedPerformanceData);
                     setSessionAverageData(formattedSessionData);
-                    setWeightData(activitySession);
+                    setWeightData(formattedActivitySession);
                 }
             } catch (error) {
                 console.error("Erreur lors de la récupération des données :", error);
@@ -72,31 +68,25 @@ export default function Profil() {
         <>
             <div className='container-all'>
                 <div className='welcome'>
-                    <h1 className='hello'>Bonjour <span>{userData.userInfos ? userData.userInfos.firstName : ''}</span></h1>
+                    <h1 className='hello'>Bonjour <span className='firstname'>{userData.userInfos ? userData.userInfos.firstName : ''}</span></h1>
                     <p className='congrats'>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
                 </div>
-                <div className='container-down'>
-                    <div className='down-left'>
-                        <div className='left-up'>
-                            <div className='weight'>
-                                <Weight data={activitySession} />
+                <div className='ctn-dashboard'>
+                    <div className='left'>
+                        <Weight data={activitySession} />
+                        <div className='datas-perf'>
+                            <div className='parts'>
+                                <Goals data={formattedSessionData} />
                             </div>
-                        </div>
-                        <div className='left-down'>
-                            <div className='datas-perf'>
-                                <div className='objectifs' id='content'>
-                                    <Goals data={formattedSessionData} />
-                                </div>
-                                <div className='radar'>
-                                    <SimpleRadarChart data={performanceData} />
-                                </div>
-                                <div className='score'>
-                                    <Kpi userId={id} />
-                                </div>
+                            <div className='parts'>
+                                <SimpleRadarChart data={performanceData} />
+                            </div>
+                            <div className='parts'>
+                                <Kpi userId={id} />
                             </div>
                         </div>
                     </div>
-                    <div className='down-right'>
+                    <div className='right'>
                         <div className='nutriments'>
                             <FoodStats userId={id} />
                         </div>

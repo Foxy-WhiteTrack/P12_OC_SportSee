@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import { getUserDataById } from '../../api/callApi.js';
+import { getUserDataById } from '../../services/callApi.js';
 
 export default function Home() {
     const [userData, setUserData] = useState([]);
@@ -25,7 +25,7 @@ export default function Home() {
         <>
             <div className="dual-profil">
                 {userData.map((user) => (
-                    <Link to={`/profil/${user.id}`} key={user.id}>
+                    <Link className='profil-solo' to={`/profil/${user.id}`} key={user.id}>
                         <>
                             <h2>{user.userInfos.firstName}</h2>
                             <h3>{user.userInfos.lastName}</h3>

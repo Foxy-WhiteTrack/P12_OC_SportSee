@@ -13,7 +13,6 @@ export const getUserDataById = async (id) => {
     }
 };
 
-
 export const getUserPerformanceDataById = async (userId) => {
     try {
         const response = await fetch(`${BASE_URL}/user/${userId}/performance`);

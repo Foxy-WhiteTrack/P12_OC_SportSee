@@ -1,8 +1,17 @@
 import './Kpi.css';
 import React, { useState, useEffect } from 'react';
-import { getUserDataById } from '../../api/callApi';
+import { getUserDataById } from '../../services/callApi';
 
-import { RadialBarChart, RadialBar, Legend } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import styled from 'styled-components'
+
+const StyledResponsiveContainer = styled(ResponsiveContainer)`
+  background: #fbfbfb;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
+  border-radius: 5px;
+`
+
+const COLORS = ['#FF0000', '#e8e8e8'];
 
 export default function Kpi({ userId }) {
     const [userData, setUserData] = useState({});
@@ -23,38 +32,58 @@ export default function Kpi({ userId }) {
         { name: 'Score', value: userData.todayScore ? userData.todayScore * 100 : 0 },
     ];
 
-    const scorePercentage = userData.todayScore ? userData.todayScore * 100 : 0;
-    const startAngle = 0;
-    const endAngle = (scorePercentage / 100) * 360;
+    const totalScore = userData.todayScore || userData.score;
+    const scorePercentage = totalScore ? totalScore * 100 : 0;
+    const startAngle = 90;
+    const endAngle = 180;
 
     return (
-        <>
-            <div className='title-score'>
-                <p className=''>Score</p>
-            </div>
-            <div className='donut-score'>
-                <RadialBarChart
-                    width={200}
-                    height={200}
-                    cx={100}
-                    cy={100}
-                    innerRadius={40}
-                    outerRadius={80}
-                    barSize={8}
-                    data={radialData}
-                    label={() => ''}
-                    startAngle={startAngle}
-                    endAngle={endAngle}
-                >
-                    <RadialBar minAngle={15} background dataKey='value' fill='#FF0000' />
-                    <Legend iconSize={0} />
-                </RadialBarChart>
-            </div>
+        <div className='ctn-score'>
 
-            <div className='results-score'>
-                <p className='data-score'>{userData.todayScore ? userData.todayScore * 100 : ''} %</p>
-                <p className='text-score'>de votre objectif</p>
-            </div>
-        </>
+            <StyledResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                    <text x={35} y={35} textAnchor="middle" dominantBaseline="middle">
+                        Score
+                    </text>
+                    <circle cx="50%" cy="50%" r="35%" fill="white" />
+                    <text
+                        x="50%"
+                        y="45%"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        fontSize={'24px'}
+                        fontWeight={700}
+                    >
+                        {radialData[0].value}%
+                    </text>
+                    <text
+                        className='kpi-txt'
+                        x="50%"
+                        y="55%"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        fontSize={'14px'}
+                        fontWeight={700}
+                        fill={'#74798c'}
+                    >
+                        de votre objectif
+                    </text>
+
+                    <Pie
+                        data={radialData}
+                        dataKey="value"
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={85}
+                        fill="#FF0000"
+                        startAngle={startAngle}
+                        endAngle={endAngle}
+                        paddingAngle={0}
+                        cornerRadius={5}
+                    >
+                    </Pie>
+                </PieChart>
+            </StyledResponsiveContainer>
+        </div >
     );
 }

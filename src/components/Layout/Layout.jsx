@@ -6,7 +6,10 @@ export default function Layout() {
     return (
         <>
             <Header />
-            <Outlet />
+            <div className='outlet'>
+                <Outlet />
+            </div>
+
             <SideBar />
         </>
     );

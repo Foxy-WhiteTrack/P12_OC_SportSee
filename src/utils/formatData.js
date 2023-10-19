@@ -1,18 +1,30 @@
-import { getUserDataById, getUserPerformanceDataById } from '../api/callApi.js';
+import { translate, dayMap, ordertranslate } from '../services/translate.js';
 
-const user1et2 = USER_PERFORMANCE.map(userPerformance => {
-    const userId = userPerformance.userId;
-    const performanceData = Object.keys(userPerformance.kind).map(kindId => {
-        const axis = userPerformance.kind[kindId];
-        const dataItem = userPerformance.data.find(item => item.kind === parseInt(kindId));
+// Formate les données de performance
+export const formatPerformanceData = (performanceApiResponse) => {
+    return ordertranslate.map(kindId => {
+        const subject = performanceApiResponse.kind[kindId];
+        const dataItem = performanceApiResponse.data.find(item => item.kind === parseInt(kindId));
         return {
-            axis,
-            value: dataItem ? dataItem.value : 0 // Si les données ne sont pas trouvées, vous pouvez définir une valeur par défaut ici.
+            subject: translate[subject] || subject, // Utilisez la traduction
+            A: dataItem ? dataItem.value : 0,
         };
     });
+};
 
-    return {
-        userId,
-        performanceData
-    };
-});
+// Formate les données de sessions moyennes
+export const formatAverageSessionData = (sessionAverageApiResponse) => {
+    return sessionAverageApiResponse.sessions.map(session => ({
+        day: dayMap[session.day] || session.day, // Utilisez la traduction
+        sessionLength: session.sessionLength,
+    }));
+};
+
+// Formate les données d'activité
+export const formatActivityData = (weightData) => {
+    return weightData.sessions;
+};
+
+// fonction de normalisation!
+// if score n'existe pas alors todayScore = score
+// ignorer les données qui n'existe pas (exemple: activité pour l'ID 13)

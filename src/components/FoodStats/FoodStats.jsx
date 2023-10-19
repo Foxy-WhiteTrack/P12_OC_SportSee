@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getUserDataById } from '../../api/callApi';
+import { getUserDataById } from '../../services/callApi';
 import './FoodStats.css';
+
+import Protein from '../Icons/Protein';
+import Lipides from '../Icons/Lipides';
+import Glucides from '../Icons/Glucides';
+import Calories from '../Icons/Calories';
 
 export default function FoodStats({ userId }) {
     const [userData, setUserData] = useState({});
@@ -18,35 +23,43 @@ export default function FoodStats({ userId }) {
     }, [userId]);
 
     return (
-        <>
-            <div className='kcal'>
-                <div className='icon-kcal'>
-
+        <div className='ctn-icons'>
+            <div className='icons-food'>
+                <div className='iconf'>
+                    <Calories />
                 </div>
-                <p className='nbr-kcal'>{userData.keyData ? userData.keyData.calorieCount : ''}</p>
-                <p>Calories</p>
-            </div>
-            <div className='protein'>
-                <div className='icon-protein'>
-
+                <div className='datas-icons'>
+                    <p className='nbr'>{userData.keyData ? userData.keyData.calorieCount + 'kCal' : ''}</p>
+                    <p className='name'>Calories</p>
                 </div>
-                <p className='nbr-protein'>{userData.keyData ? userData.keyData.proteinCount : ''}</p>
-                <p>Proteines</p>
             </div>
-            <div className='glucides'>
-                <div className='icon-glucides'>
-
+            <div className='icons-food'>
+                <div className='iconf'>
+                    <Protein />
                 </div>
-                <p className='nbr-glucides'>{userData.keyData ? userData.keyData.carbohydrateCount : ''}</p>
-                <p>Glucides</p>
-            </div>
-            <div className='lipides'>
-                <div className='icon-lipides'>
-
+                <div className='datas-icons'>
+                    <p className='nbr'>{userData.keyData ? userData.keyData.proteinCount + 'g' : ''}</p>
+                    <p className='name'>Proteines</p>
                 </div>
-                <p className='nbr-lipides'>{userData.keyData ? userData.keyData.lipidCount : ''}</p>
-                <p>Lipides</p>
             </div>
-        </>
+            <div className='icons-food'>
+                <div className='iconf'>
+                    <Glucides />
+                </div>
+                <div className='datas-icons'>
+                    <p className='nbr'>{userData.keyData ? userData.keyData.carbohydrateCount + 'g' : ''}</p>
+                    <p className='name'>Glucides</p>
+                </div>
+            </div>
+            <div className='icons-food'>
+                <div className='iconf'>
+                    <Lipides />
+                </div>
+                <div className='datas-icons'>
+                    <p className='nbr'>{userData.keyData ? userData.keyData.lipidCount + 'g' : ''}</p>
+                    <p className='name'>Lipides</p>
+                </div>
+            </div>
+        </ div>
     );
 }
