@@ -1,3 +1,8 @@
 .ctn-weight {
     /* height: 100%; */
 }
+
+.lgd-points {
+    display: flex;
+    align-items: center;
+}

@@ -42,7 +42,7 @@ export default function Kpi({ userId }) {
 
             <StyledResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                    <text x={35} y={35} textAnchor="middle" dominantBaseline="middle">
+                    <text x={35} y={35} className='score-txt1' textAnchor="middle" dominantBaseline="middle">
                         Score
                     </text>
                     <circle cx="50%" cy="50%" r="35%" fill="white" />

@@ -39,7 +39,7 @@ const LegendTitle = styled.h3`
 `
 
 const LegendLi = styled.li`
-  display: inline;
+  display: flex;
   color: rgba(116, 121, 140, 1);
   font-size: 16px;
   margin-right: 30px;
@@ -48,11 +48,13 @@ const LegendLi = styled.li`
     font-size: 80px;
     vertical-align: middle;
     line-height: 20px;
+    transform: translate(-5px, -5px);
   }
 `
 
 const LegendUl = styled.div`
   display: flex;
+  align-items: center;
 `
 
 export const CustomTtip = ({ active, payload }) => {
@@ -112,7 +114,7 @@ const Weight = ({ data }) => {
           barSize={7}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis tickLine={false} tickMargin={15} dataKey="index" tick={{ fontSize: 14, }} />
+          <XAxis tickLine={false} tickMargin={10} dataKey="index" tick={{ fontSize: 14, }} />
           <YAxis tick={{ fontSize: 14, }} tickLine={false} tickMargin={5} orientation="right" tickCount={3} type="number" />
           <Tooltip content={<CustomTtip />} wrapperStyle={{ outline: 0 }} />
           <Legend
