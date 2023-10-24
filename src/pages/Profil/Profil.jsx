@@ -9,6 +9,8 @@ import {
     getUserWeightDataById
 } from '../../services/callApi.js';
 
+
+
 import Goals from '../../components/Goals/Goals';
 import FoodStats from '../../components/FoodStats/FoodStats';
 import SimpleRadarChart from '../../components/SimpleRadarChart/SimpleRadarChart';
@@ -29,7 +31,6 @@ export default function Profil() {
     const [performanceData, setPerformanceData] = useState([]);
     const [formattedSessionData, setSessionAverageData] = useState([]);
     const [activitySession, setWeightData] = useState([]);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function fetchData() {

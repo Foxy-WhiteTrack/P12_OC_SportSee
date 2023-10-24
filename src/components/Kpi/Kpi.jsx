@@ -2,7 +2,7 @@ import './Kpi.css';
 import React, { useState, useEffect } from 'react';
 import { getUserDataById } from '../../services/callApi';
 
-import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie } from 'recharts';
 import styled from 'styled-components'
 
 const StyledResponsiveContainer = styled(ResponsiveContainer)`
@@ -10,8 +10,6 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
   border-radius: 5px;
 `
-
-const COLORS = ['#FF0000', '#e8e8e8'];
 
 export default function Kpi({ userId }) {
     const [userData, setUserData] = useState({});
@@ -32,10 +30,13 @@ export default function Kpi({ userId }) {
         { name: 'Score', value: userData.todayScore ? userData.todayScore * 100 : 0 },
     ];
 
-    const totalScore = userData.todayScore || userData.score;
-    const scorePercentage = totalScore ? totalScore * 100 : 0;
+    // const totalScore = userData.todayScore || userData.score;
+    // const scorePercentage = totalScore ? totalScore * 100 : 0;
     const startAngle = 90;
-    const endAngle = 180;
+    const maxAngle = 360;
+    const scorePercent = radialData[0].value;
+    const endAngle = startAngle + (maxAngle * scorePercent) / 100;
+
 
     return (
         <div className='ctn-score'>
@@ -87,3 +88,4 @@ export default function Kpi({ userId }) {
         </div >
     );
 }
+

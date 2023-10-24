@@ -60,7 +60,7 @@ const CustomizedDot = (props) => {
         <>
             <svg>
                 <rect
-                    x={cx + 1}
+                    x={cx}
                     width={1000}
                     height="100%"
                     fill="#E60000"

@@ -15,23 +15,21 @@ class UserData {
             carbohydrateCount: datas.key.carbohydrateCount,
             lipidCount: datas.key.lipidCount,
         };
-
         this.activity = activity.sessions.map(session => ({
             day: session.day,
             kilogram: session.kilogram,
             calories: session.calories,
         }));
-
         this.averageSessions = averageSessions.sessions.map(session => ({
             day: session.day,
             sessionLength: session.sessionLength,
         }));
-
         this.performance = {
             kind: performance.kind,
             data: performance.data,
         };
     }
+
 }
 
-export default User;
+export default UserData;
