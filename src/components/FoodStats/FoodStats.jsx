@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getUserDataById } from '../../services/callApi';
+import { askiId } from '../../services/mockOrApi';
+
 import './FoodStats.css';
 
 import Protein from '../Icons/Protein';
@@ -13,9 +14,11 @@ export default function FoodStats({ userId }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const user = await getUserDataById(userId);
+                const user = await askiId(userId);
+                console.log('id component: ' + userId);
                 setUserData(user);
             } catch (error) {
+                console.log('id component nope: ' + userId);
                 console.error('Erreur lors de la récupération des données :', error);
             }
         }

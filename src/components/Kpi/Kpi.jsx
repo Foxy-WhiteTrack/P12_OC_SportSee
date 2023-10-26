@@ -1,9 +1,10 @@
 import './Kpi.css';
 import React, { useState, useEffect } from 'react';
-import { getUserDataById } from '../../services/callApi';
 
 import { ResponsiveContainer, PieChart, Pie } from 'recharts';
 import styled from 'styled-components'
+
+import { askiId } from '../../services/mockOrApi';
 
 const StyledResponsiveContainer = styled(ResponsiveContainer)`
   background: #fbfbfb;
@@ -17,7 +18,7 @@ export default function Kpi({ userId }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const user = await getUserDataById(userId);
+                const user = await askiId(userId);
                 setUserData(user);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données :', error);
@@ -29,9 +30,6 @@ export default function Kpi({ userId }) {
     const radialData = [
         { name: 'Score', value: userData.todayScore ? userData.todayScore * 100 : 0 },
     ];
-
-    // const totalScore = userData.todayScore || userData.score;
-    // const scorePercentage = totalScore ? totalScore * 100 : 0;
     const startAngle = 90;
     const maxAngle = 360;
     const scorePercent = radialData[0].value;

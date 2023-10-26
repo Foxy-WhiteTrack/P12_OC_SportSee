@@ -1,17 +1,48 @@
-import { allFetchRequest } from './callApi';
-import { fetchUserMock } from './mockDatas';
+import {
+    getUserMockById,
+    getUserMockPerf,
+    getUserMockActivity,
+    getUserMockSession
+} from './callMock';
 
-const isApiOk = true;
+import {
+    getUserDataById,
+    getUserPerformanceDataById,
+    getUserGoalsDataById,
+    getUserWeightDataById
+} from './callApi.js';
 
-export const fetchApiOrMock = async (userId) => {
+const isApiOk = false;
 
-    if (isApiOk) {
-        // return getUserDataById(userId);
-        return fetchUserMock(userId);
+export const askiId = async (userId) => {
+
+    if (!isApiOk) {
+        return getUserMockById(userId);
     } else {
-        // return mockDataById(userId);
-        return allFetchRequest(userId);
+        return getUserDataById(userId);
     }
-
 }
 
+export const askPerf = async (userId) => {
+    if (!isApiOk) {
+        return getUserMockPerf(userId);
+    } else {
+        return getUserPerformanceDataById(userId);
+    }
+}
+
+export const askActivity = async (userId) => {
+    if (!isApiOk) {
+        return getUserMockActivity(userId);
+    } else {
+        return getUserWeightDataById(userId);
+    }
+}
+
+export const askSession = async (userId) => {
+    if (!isApiOk) {
+        return getUserMockSession(userId);
+    } else {
+        return getUserGoalsDataById(userId);
+    }
+}

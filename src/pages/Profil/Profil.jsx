@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Profil.css';
-// Importer les fonctions d'appel API
-import {
-    getUserDataById,
-    getUserPerformanceDataById,
-    getUserGoalsDataById,
-    getUserWeightDataById
-} from '../../services/callApi.js';
 
-
+import { askiId, askPerf, askActivity, askSession } from '../../services/mockOrApi';
 
 import Goals from '../../components/Goals/Goals';
 import FoodStats from '../../components/FoodStats/FoodStats';
@@ -35,15 +28,15 @@ export default function Profil() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const user = await getUserDataById(id);
+                const user = await askiId(id);
                 if (user.error) {
                     navigate('/error404');
                 }
                 setUserData(user);
 
-                const performanceApiResponse = await getUserPerformanceDataById(id);
-                const sessionAverageApiResponse = await getUserGoalsDataById(id);
-                const weightData = await getUserWeightDataById(id);
+                const performanceApiResponse = await askPerf(id);
+                const sessionAverageApiResponse = await askSession(id);
+                const weightData = await askActivity(id);
 
                 // Utiliser les fonctions de formatage pour mettre en forme les données
                 const formattedPerformanceData = formatPerformanceData(performanceApiResponse);

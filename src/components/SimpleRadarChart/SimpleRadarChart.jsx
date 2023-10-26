@@ -1,6 +1,6 @@
 import React from 'react';
 import './SimpleRadarChart.css';
-import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar } from 'recharts';
 import styled from 'styled-components'
 
 const StyledResponsiveContainer = styled(ResponsiveContainer)`
