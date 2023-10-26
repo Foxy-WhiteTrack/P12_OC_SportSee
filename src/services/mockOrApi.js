@@ -12,6 +12,8 @@ import {
     getUserWeightDataById
 } from './callApi.js';
 
+import { UserData as UserDataClass } from '../models/UserData';
+
 const isApiOk = false;
 
 export const askiId = async (userId) => {
@@ -44,5 +46,33 @@ export const askSession = async (userId) => {
         return getUserMockSession(userId);
     } else {
         return getUserGoalsDataById(userId);
+    }
+}
+
+//refactorisé:
+export const allMockRequest = async (userId) => {
+    try {
+        if (isApiOk) {
+            const [userIdData, perfData, activityData, sessionData] = await Promise.all([
+                getUserDataById(userId),
+                getUserPerformanceDataById(userId),
+                getUserWeightDataById(userId),
+                getUserGoalsDataById(userId)
+            ]);
+
+            return new UserDataClass(userIdData, perfData, activityData, sessionData);
+        } else {
+            const [userIdData, perfData, activityData, sessionData] = await Promise.all([
+                getUserMockById(userId),
+                getUserMockPerf(userId),
+                getUserMockActivity(userId),
+                getUserMockSession(userId)
+            ]);
+
+            return new UserDataClass(userIdData, perfData, activityData, sessionData);
+        }
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
+        throw error;
     }
 }

@@ -1,7 +1,7 @@
 // classe de modélisation
 class UserData {
 
-    constructor(datas, activity, averageSessions, performance) {
+    constructor(datas, performance, activity, averageSessions) {
         this.id = datas.id;
         this.userInfos = {
             firstName: datas.userInfos.firstName,
@@ -10,10 +10,10 @@ class UserData {
         };
         this.score = datas.score || datas.todayScore;
         this.key = {
-            calorieCount: datas.key.calorieCount,
-            proteinCount: datas.key.proteinCount,
-            carbohydrateCount: datas.key.carbohydrateCount,
-            lipidCount: datas.key.lipidCount,
+            calorieCount: datas.keyData.calorieCount,
+            proteinCount: datas.keyData.proteinCount,
+            carbohydrateCount: datas.keyData.carbohydrateCount,
+            lipidCount: datas.keyData.lipidCount,
         };
         this.activity = activity.sessions.map(session => ({
             day: session.day,
@@ -32,4 +32,4 @@ class UserData {
 
 }
 
-export default UserData;
+export { UserData };

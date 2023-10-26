@@ -6,7 +6,7 @@ export const formatPerformanceData = (performanceApiResponse) => {
         const subject = performanceApiResponse.kind[kindId];
         const dataItem = performanceApiResponse.data.find(item => item.kind === parseInt(kindId));
         return {
-            subject: translate[subject] || subject, // Utilisez la traduction
+            subject: translate[subject] || subject,
             A: dataItem ? dataItem.value : 0,
         };
     });
@@ -14,15 +14,16 @@ export const formatPerformanceData = (performanceApiResponse) => {
 
 // Formate les données de sessions moyennes
 export const formatAverageSessionData = (sessionAverageApiResponse) => {
-    return sessionAverageApiResponse.sessions.map(session => ({
-        day: dayMap[session.day] || session.day, // Utilisez la traduction
+    return sessionAverageApiResponse.map(session => ({
+        day: dayMap[session.day] || session.day,
         sessionLength: session.sessionLength,
     }));
 };
 
 // Formate les données d'activité
+// on attend le tableau
 export const formatActivityData = (weightData) => {
-    return weightData.sessions;
+    return weightData;
 };
 
 // fonction de normalisation!

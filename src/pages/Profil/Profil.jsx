@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Profil.css';
 
-import { askiId, askPerf, askActivity, askSession } from '../../services/mockOrApi';
+import { askiId, askPerf, askActivity, askSession, allMockRequest } from '../../services/mockOrApi';
 
 import Goals from '../../components/Goals/Goals';
 import FoodStats from '../../components/FoodStats/FoodStats';
@@ -28,15 +28,25 @@ export default function Profil() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const user = await askiId(id);
+                const userDataInstance = await allMockRequest(id);
+
+                const user = userDataInstance.id;
                 if (user.error) {
                     navigate('/error404');
                 }
                 setUserData(user);
 
-                const performanceApiResponse = await askPerf(id);
-                const sessionAverageApiResponse = await askSession(id);
-                const weightData = await askActivity(id);
+                // const performanceApiResponse = await askPerf(id);
+                // const sessionAverageApiResponse = await askSession(id);
+                // const weightData = await askActivity(id);
+
+
+
+                const performanceApiResponse = userDataInstance.performance;
+                const sessionAverageApiResponse = userDataInstance.averageSessions;
+                const weightData = userDataInstance.activity;
+
+
 
                 // Utiliser les fonctions de formatage pour mettre en forme les données
                 const formattedPerformanceData = formatPerformanceData(performanceApiResponse);
@@ -53,6 +63,7 @@ export default function Profil() {
             } catch (error) {
                 console.error("Erreur lors de la récupération des données :", error);
             }
+
         }
 
         fetchData();

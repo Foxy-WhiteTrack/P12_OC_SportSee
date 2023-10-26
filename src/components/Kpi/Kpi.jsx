@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ResponsiveContainer, PieChart, Pie } from 'recharts';
 import styled from 'styled-components'
 
-import { askiId } from '../../services/mockOrApi';
+import { allMockRequest } from '../../services/mockOrApi';
 
 const StyledResponsiveContainer = styled(ResponsiveContainer)`
   background: #fbfbfb;
@@ -18,8 +18,9 @@ export default function Kpi({ userId }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const user = await askiId(userId);
-                setUserData(user);
+                const userDataInstance = await allMockRequest(userId);
+                console.log(userDataInstance);
+                setUserData(userDataInstance);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données :', error);
             }
@@ -28,13 +29,13 @@ export default function Kpi({ userId }) {
     }, [userId]);
 
     const radialData = [
-        { name: 'Score', value: userData.todayScore ? userData.todayScore * 100 : 0 },
+        { name: 'Score', value: userData.score ? userData.score * 100 : 0 },
     ];
     const startAngle = 90;
     const maxAngle = 360;
     const scorePercent = radialData[0].value;
     const endAngle = startAngle + (maxAngle * scorePercent) / 100;
-
+    // const endAngle = 360 + 80;
 
     return (
         <div className='ctn-score'>
@@ -44,7 +45,7 @@ export default function Kpi({ userId }) {
                     <text x={35} y={35} className='score-txt1' textAnchor="middle" dominantBaseline="middle">
                         Score
                     </text>
-                    <circle cx="50%" cy="50%" r="35%" fill="white" />
+                    <circle cx="50%" cy="50%" r="30%" fill="white" />
                     <text
                         x="50%"
                         y="45%"
@@ -64,8 +65,22 @@ export default function Kpi({ userId }) {
                         fontSize={'14px'}
                         fontWeight={700}
                         fill={'#74798c'}
+                        width={20}
                     >
-                        de votre objectif
+                        de votre
+                    </text>
+                    <text
+                        className='kpi-txt'
+                        x="50%"
+                        y="62%"
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        fontSize={'14px'}
+                        fontWeight={700}
+                        fill={'#74798c'}
+                        width={20}
+                    >
+                        objectif
                     </text>
 
                     <Pie
@@ -73,8 +88,10 @@ export default function Kpi({ userId }) {
                         dataKey="value"
                         cx="50%"
                         cy="50%"
-                        innerRadius={85}
+                        innerRadius={70}
+                        outerRadius={80}
                         fill="#FF0000"
+                        stroke="red"
                         startAngle={startAngle}
                         endAngle={endAngle}
                         paddingAngle={0}

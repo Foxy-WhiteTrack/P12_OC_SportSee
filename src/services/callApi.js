@@ -1,5 +1,5 @@
 // apiService.js
-import UserDatas from '../models/UserData';
+import { UserData } from '../models/UserData';
 
 const BASE_URL = 'http://localhost:3000'; // URL du backend (3001 étant celui du frontend)
 
@@ -48,31 +48,31 @@ export const getUserWeightDataById = async (userId) => {
 };
 
 // refactorisé:
-// export const allFetchRequest = async (id) => {
+export const allFetchRequest = async (id) => {
 
-//     const IdResponse = await fetch(`${BASE_URL}/user/${id}`);
-//     if (!IdResponse.ok) {
-//         throw new Error(IdResponse.status);
-//     }
-//     const idData = await IdResponse.json();
+    const IdResponse = await fetch(`${BASE_URL}/user/${id}`);
+    if (!IdResponse.ok) {
+        throw new Error(IdResponse.status);
+    }
+    const idData = await IdResponse.json();
 
-//     const perfResponse = await fetch(`${BASE_URL}/user/${id}/performance`);
-//     if (!perfResponse.ok) {
-//         throw new Error(perfResponse.status);
-//     }
-//     const perfData = await perfResponse.json();
+    const perfResponse = await fetch(`${BASE_URL}/user/${id}/performance`);
+    if (!perfResponse.ok) {
+        throw new Error(perfResponse.status);
+    }
+    const perfData = await perfResponse.json();
 
-//     const goalResponse = await fetch(`${BASE_URL}/user/${id}/average-sessions`);
-//     if (!goalResponse.ok) {
-//         throw new Error(goalResponse.status);
-//     }
-//     const goalData = await goalResponse.json();
+    const goalResponse = await fetch(`${BASE_URL}/user/${id}/average-sessions`);
+    if (!goalResponse.ok) {
+        throw new Error(goalResponse.status);
+    }
+    const goalData = await goalResponse.json();
 
-//     const activityResponse = await fetch(`${BASE_URL}/user/${id}/activity`);
-//     if (!activityResponse.ok) {
-//         throw new Error(activityResponse.status);
-//     }
-//     const activityData = await activityResponse.json();
+    const activityResponse = await fetch(`${BASE_URL}/user/${id}/activity`);
+    if (!activityResponse.ok) {
+        throw new Error(activityResponse.status);
+    }
+    const activityData = await activityResponse.json();
 
-//     return new UserDatas(idData.data, perfData.data, goalData.data, activityData.data);
-// }
+    return new UserData(idData.data, perfData.data, goalData.data, activityData.data);
+}

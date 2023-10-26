@@ -15,10 +15,8 @@ export default function FoodStats({ userId }) {
         async function fetchData() {
             try {
                 const user = await askiId(userId);
-                console.log('id component: ' + userId);
                 setUserData(user);
             } catch (error) {
-                console.log('id component nope: ' + userId);
                 console.error('Erreur lors de la récupération des données :', error);
             }
         }
