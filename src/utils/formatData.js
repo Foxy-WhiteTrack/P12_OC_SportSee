@@ -21,11 +21,6 @@ export const formatAverageSessionData = (sessionAverageApiResponse) => {
 };
 
 // Formate les données d'activité
-// on attend le tableau
 export const formatActivityData = (weightData) => {
     return weightData;
 };
-
-// fonction de normalisation!
-// if score n'existe pas alors todayScore = score
-// ignorer les données qui n'existe pas (exemple: activité pour l'ID 13)

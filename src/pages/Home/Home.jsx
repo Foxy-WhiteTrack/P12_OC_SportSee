@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-import { askiId } from '../../services/mockOrApi';
+import { allMockRequest } from '../../services/mockOrApi';
 
 export default function Home() {
     const [userData, setUserData] = useState([]);
@@ -9,8 +9,8 @@ export default function Home() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const user1 = await askiId(12);
-                const user2 = await askiId(18);
+                const user1 = await allMockRequest(12);
+                const user2 = await allMockRequest(18);
 
                 setUserData([user1, user2]);
             } catch (error) {

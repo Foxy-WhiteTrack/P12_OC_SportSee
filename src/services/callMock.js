@@ -4,7 +4,8 @@ import { USER_MAIN_DATA, USER_PERFORMANCE, USER_ACTIVITY, USER_AVERAGE_SESSIONS 
 
 export const getUserMockById = async (userId) => {
     try {
-        let user = USER_MAIN_DATA.find((item) => item.id == userId);
+        let numberId = Number(userId);
+        let user = USER_MAIN_DATA.find((item) => item.id === numberId);
         if (!user) {
             throw new Error('Utilisateur non trouvé');
         }
@@ -17,7 +18,8 @@ export const getUserMockById = async (userId) => {
 
 export const getUserMockPerf = async (userId) => {
     try {
-        let userPerf = USER_PERFORMANCE.find((performanceData) => performanceData.userId == userId);
+        let numberId = Number(userId);
+        let userPerf = USER_PERFORMANCE.find((performanceData) => performanceData.userId === numberId);
         if (!userPerf) {
             throw new Error('Performances non trouvées');
         }
@@ -37,7 +39,8 @@ export const getUserMockPerf = async (userId) => {
 
 export const getUserMockActivity = async (userId) => {
     try {
-        let userActivity = USER_ACTIVITY.find((item) => item.userId == userId);
+        let numberId = Number(userId);
+        let userActivity = USER_ACTIVITY.find((item) => item.userId === numberId);
         if (!userActivity) {
             throw new Error('Performances non trouvées');
         }
@@ -50,7 +53,8 @@ export const getUserMockActivity = async (userId) => {
 
 export const getUserMockSession = async (userId) => {
     try {
-        let userSession = USER_AVERAGE_SESSIONS.find((item) => item.userId == userId);
+        let numberId = Number(userId);
+        let userSession = USER_AVERAGE_SESSIONS.find((item) => item.userId === numberId);
         if (!userSession) {
             throw new Error('Performances non trouvées');
         }

@@ -14,40 +14,40 @@ import {
 
 import { UserData as UserDataClass } from '../models/UserData';
 
-const isApiOk = false;
+const isApiOk = true;
 
-export const askiId = async (userId) => {
+// export const askiId = async (userId) => {
 
-    if (!isApiOk) {
-        return getUserMockById(userId);
-    } else {
-        return getUserDataById(userId);
-    }
-}
+//     if (!isApiOk) {
+//         return getUserMockById(userId);
+//     } else {
+//         return getUserDataById(userId);
+//     }
+// }
 
-export const askPerf = async (userId) => {
-    if (!isApiOk) {
-        return getUserMockPerf(userId);
-    } else {
-        return getUserPerformanceDataById(userId);
-    }
-}
+// export const askPerf = async (userId) => {
+//     if (!isApiOk) {
+//         return getUserMockPerf(userId);
+//     } else {
+//         return getUserPerformanceDataById(userId);
+//     }
+// }
 
-export const askActivity = async (userId) => {
-    if (!isApiOk) {
-        return getUserMockActivity(userId);
-    } else {
-        return getUserWeightDataById(userId);
-    }
-}
+// export const askActivity = async (userId) => {
+//     if (!isApiOk) {
+//         return getUserMockActivity(userId);
+//     } else {
+//         return getUserWeightDataById(userId);
+//     }
+// }
 
-export const askSession = async (userId) => {
-    if (!isApiOk) {
-        return getUserMockSession(userId);
-    } else {
-        return getUserGoalsDataById(userId);
-    }
-}
+// export const askSession = async (userId) => {
+//     if (!isApiOk) {
+//         return getUserMockSession(userId);
+//     } else {
+//         return getUserGoalsDataById(userId);
+//     }
+// }
 
 //refactorisé:
 export const allMockRequest = async (userId) => {

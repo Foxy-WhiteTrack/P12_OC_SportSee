@@ -19,7 +19,6 @@ export default function Kpi({ userId }) {
         async function fetchData() {
             try {
                 const userDataInstance = await allMockRequest(userId);
-                console.log(userDataInstance);
                 setUserData(userDataInstance);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données :', error);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './Profil.css';
 
-import { askiId, askPerf, askActivity, askSession, allMockRequest } from '../../services/mockOrApi';
+import { allMockRequest } from '../../services/mockOrApi';
 
 import Goals from '../../components/Goals/Goals';
 import FoodStats from '../../components/FoodStats/FoodStats';
@@ -36,24 +36,17 @@ export default function Profil() {
                 }
                 setUserData(user);
 
-                // const performanceApiResponse = await askPerf(id);
-                // const sessionAverageApiResponse = await askSession(id);
-                // const weightData = await askActivity(id);
-
-
-
                 const performanceApiResponse = userDataInstance.performance;
                 const sessionAverageApiResponse = userDataInstance.averageSessions;
                 const weightData = userDataInstance.activity;
 
-
-
-                // Utiliser les fonctions de formatage pour mettre en forme les données
+                // fonctions de formatage pour mettre en forme les données
                 const formattedPerformanceData = formatPerformanceData(performanceApiResponse);
                 const formattedSessionData = formatAverageSessionData(sessionAverageApiResponse);
+                console.log(formattedSessionData);
                 const formattedActivitySession = formatActivityData(weightData);
 
-                if (!formattedPerformanceData || !formattedSessionData) {
+                if (!formattedPerformanceData || !formattedSessionData || !formattedActivitySession) {
                     console.error("Les données sont manquantes ou incorrectes.");
                 } else {
                     setPerformanceData(formattedPerformanceData);
@@ -63,7 +56,6 @@ export default function Profil() {
             } catch (error) {
                 console.error("Erreur lors de la récupération des données :", error);
             }
-
         }
 
         fetchData();

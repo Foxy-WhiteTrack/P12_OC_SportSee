@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { askiId } from '../../services/mockOrApi';
+import { allMockRequest } from '../../services/mockOrApi';
 
 import './FoodStats.css';
 
@@ -14,7 +14,9 @@ export default function FoodStats({ userId }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const user = await askiId(userId);
+                const userDataInstance = await allMockRequest(userId);
+
+                const user = userDataInstance.id;
                 setUserData(user);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données :', error);
