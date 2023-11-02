@@ -20,4 +20,4 @@ USER_MAIN_DATA.forEach(mainData => {
     users.push(user);
 });
 
-console.log(users);
+// console.log(users);

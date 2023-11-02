@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { allMockRequest } from '../../services/mockOrApi';
 
+import { useParams } from 'react-router-dom';
+
 import './FoodStats.css';
 
 import Protein from '../Icons/Protein';
@@ -8,22 +10,25 @@ import Lipides from '../Icons/Lipides';
 import Glucides from '../Icons/Glucides';
 import Calories from '../Icons/Calories';
 
-export default function FoodStats({ userId }) {
+export default function FoodStats({ }) {
+
+    const { id } = useParams();
+
+    // 
     const [userData, setUserData] = useState({});
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const userDataInstance = await allMockRequest(userId);
+                const userDataInstance = await allMockRequest(id);
+                setUserData(userDataInstance);
 
-                const user = userDataInstance.id;
-                setUserData(user);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données :', error);
             }
         }
         fetchData();
-    }, [userId]);
+    }, [id]);
 
     return (
         <div className='ctn-icons'>
@@ -32,6 +37,7 @@ export default function FoodStats({ userId }) {
                     <Calories />
                 </div>
                 <div className='datas-icons'>
+
                     <p className='nbr'>{userData.keyData ? userData.keyData.calorieCount + 'kCal' : ''}</p>
                     <p className='name'>Calories</p>
                 </div>

@@ -16,39 +16,6 @@ import { UserData as UserDataClass } from '../models/UserData';
 
 const isApiOk = true;
 
-// export const askiId = async (userId) => {
-
-//     if (!isApiOk) {
-//         return getUserMockById(userId);
-//     } else {
-//         return getUserDataById(userId);
-//     }
-// }
-
-// export const askPerf = async (userId) => {
-//     if (!isApiOk) {
-//         return getUserMockPerf(userId);
-//     } else {
-//         return getUserPerformanceDataById(userId);
-//     }
-// }
-
-// export const askActivity = async (userId) => {
-//     if (!isApiOk) {
-//         return getUserMockActivity(userId);
-//     } else {
-//         return getUserWeightDataById(userId);
-//     }
-// }
-
-// export const askSession = async (userId) => {
-//     if (!isApiOk) {
-//         return getUserMockSession(userId);
-//     } else {
-//         return getUserGoalsDataById(userId);
-//     }
-// }
-
 //refactorisé:
 export const allMockRequest = async (userId) => {
     try {
@@ -59,6 +26,7 @@ export const allMockRequest = async (userId) => {
                 getUserWeightDataById(userId),
                 getUserGoalsDataById(userId)
             ]);
+            console.log("Données API");
 
             return new UserDataClass(userIdData, perfData, activityData, sessionData);
         } else {
@@ -68,6 +36,7 @@ export const allMockRequest = async (userId) => {
                 getUserMockActivity(userId),
                 getUserMockSession(userId)
             ]);
+            console.log("Données mockées");
 
             return new UserDataClass(userIdData, perfData, activityData, sessionData);
         }

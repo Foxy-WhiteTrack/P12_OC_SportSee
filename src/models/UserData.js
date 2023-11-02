@@ -9,7 +9,7 @@ class UserData {
             age: datas.userInfos.age,
         };
         this.score = datas.score || datas.todayScore;
-        this.key = {
+        this.keyData = {
             calorieCount: datas.keyData.calorieCount,
             proteinCount: datas.keyData.proteinCount,
             carbohydrateCount: datas.keyData.carbohydrateCount,

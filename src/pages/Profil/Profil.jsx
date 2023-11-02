@@ -20,7 +20,9 @@ import {
 export default function Profil() {
     const { id } = useParams();
     const navigate = useNavigate();
+
     const [userData, setUserData] = useState({});
+
     const [performanceData, setPerformanceData] = useState([]);
     const [formattedSessionData, setSessionAverageData] = useState([]);
     const [activitySession, setWeightData] = useState([]);
@@ -34,7 +36,7 @@ export default function Profil() {
                 if (user.error) {
                     navigate('/error404');
                 }
-                setUserData(user);
+                setUserData(userDataInstance);
 
                 const performanceApiResponse = userDataInstance.performance;
                 const sessionAverageApiResponse = userDataInstance.averageSessions;
@@ -43,7 +45,6 @@ export default function Profil() {
                 // fonctions de formatage pour mettre en forme les données
                 const formattedPerformanceData = formatPerformanceData(performanceApiResponse);
                 const formattedSessionData = formatAverageSessionData(sessionAverageApiResponse);
-                console.log(formattedSessionData);
                 const formattedActivitySession = formatActivityData(weightData);
 
                 if (!formattedPerformanceData || !formattedSessionData || !formattedActivitySession) {
@@ -60,6 +61,8 @@ export default function Profil() {
 
         fetchData();
     }, [id]);
+
+    // console.log(userData.userInfos);
 
     return (
         <>
@@ -85,7 +88,7 @@ export default function Profil() {
                     </div>
                     <div className='right'>
                         <div className='nutriments'>
-                            <FoodStats userId={id} />
+                            <FoodStats />
                         </div>
                     </div>
                 </div>
