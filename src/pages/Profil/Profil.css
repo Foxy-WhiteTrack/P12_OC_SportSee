@@ -73,4 +73,13 @@
     .datas-perf {
         gap: 0px;
     }
+
+    .ctn-dashboard {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin: auto;
+        gap: 2vw;
+        height: auto;
+    }
 }

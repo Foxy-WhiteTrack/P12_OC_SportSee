@@ -10,6 +10,8 @@ import Lipides from '../Icons/Lipides';
 import Glucides from '../Icons/Glucides';
 import Calories from '../Icons/Calories';
 
+import Card from '../Card/Card';
+
 export default function FoodStats({ }) {
 
     const { id } = useParams();
@@ -31,44 +33,11 @@ export default function FoodStats({ }) {
     }, [id]);
 
     return (
-        <div className='ctn-icons'>
-            <div className='icons-food'>
-                <div className='iconf'>
-                    <Calories />
-                </div>
-                <div className='datas-icons'>
-
-                    <p className='nbr'>{userData.keyData ? userData.keyData.calorieCount + 'kCal' : ''}</p>
-                    <p className='name'>Calories</p>
-                </div>
-            </div>
-            <div className='icons-food'>
-                <div className='iconf'>
-                    <Protein />
-                </div>
-                <div className='datas-icons'>
-                    <p className='nbr'>{userData.keyData ? userData.keyData.proteinCount + 'g' : ''}</p>
-                    <p className='name'>Proteines</p>
-                </div>
-            </div>
-            <div className='icons-food'>
-                <div className='iconf'>
-                    <Glucides />
-                </div>
-                <div className='datas-icons'>
-                    <p className='nbr'>{userData.keyData ? userData.keyData.carbohydrateCount + 'g' : ''}</p>
-                    <p className='name'>Glucides</p>
-                </div>
-            </div>
-            <div className='icons-food'>
-                <div className='iconf'>
-                    <Lipides />
-                </div>
-                <div className='datas-icons'>
-                    <p className='nbr'>{userData.keyData ? userData.keyData.lipidCount + 'g' : ''}</p>
-                    <p className='name'>Lipides</p>
-                </div>
-            </div>
-        </ div>
+        <div className="ctn-icons">
+            <Card icon={<Calories />} value={userData.keyData ? userData.keyData.calorieCount + 'kCal' : ''} label="Calories" />
+            <Card icon={<Protein />} value={userData.keyData ? userData.keyData.proteinCount + 'g' : ''} label="Protéines" />
+            <Card icon={<Glucides />} value={userData.keyData ? userData.keyData.carbohydrateCount + 'g' : ''} label="Glucides" />
+            <Card icon={<Lipides />} value={userData.keyData ? userData.keyData.lipidCount + 'g' : ''} label="Lipides" />
+        </div>
     );
 }
