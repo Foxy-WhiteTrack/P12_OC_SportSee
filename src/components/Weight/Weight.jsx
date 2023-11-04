@@ -27,6 +27,7 @@ const LegendDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
 `
 
 const LegendTitle = styled.h3`

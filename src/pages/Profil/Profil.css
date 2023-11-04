@@ -63,3 +63,14 @@
 .nutriments {
     height: 100%;
 }
+
+@media screen and (max-width:1025px) {
+    .parts {
+        height: 160px;
+        width: 32%;
+    }
+
+    .datas-perf {
+        gap: 0px;
+    }
+}

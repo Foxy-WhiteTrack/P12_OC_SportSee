@@ -13,12 +13,18 @@ import styled from 'styled-components'
 const StyledUl = styled.ul`
   font-style: normal;
   font-weight: 500;
-  font-size: 15px;
   line-height: 24px;
   color: #FFFFFF;
   mix-blend-mode: normal;
   opacity: 0.5;
+  font-size: 15px;
   padding-inline-start: 10px;
+
+  @media screen and (max-width:1025px) {
+        font-size: 12px;
+        min-width: 157px;
+        padding-inline-start: 0px;
+}
 `
 
 const StyledDiv = styled.div`
@@ -31,7 +37,7 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
   border-radius: 5px;
 `
 export const customLegend = () => {
-    return <StyledUl>Durée moyenne des sessions</StyledUl>
+    return <StyledUl className='text-goal'>Durée moyenne des sessions</StyledUl>
 }
 
 export const CustomTtp = ({ active, payload }) => {

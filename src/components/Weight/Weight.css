@@ -6,3 +6,17 @@
     display: flex;
     align-items: center;
 }
+
+@media screen and (max-width:1024px) {
+    li {
+        font-size: 14px !important;
+    }
+
+    .bxpnhN {
+        align-items: center;
+    }
+
+    .bxpnhN h3 {
+        align-items: center;
+    }
+}

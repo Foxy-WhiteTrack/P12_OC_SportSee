@@ -34,7 +34,6 @@ export default function Kpi({ userId }) {
     const maxAngle = 360;
     const scorePercent = radialData[0].value;
     const endAngle = startAngle + (maxAngle * scorePercent) / 100;
-    // const endAngle = 360 + 80;
 
     return (
         <div className='ctn-score'>
@@ -81,14 +80,13 @@ export default function Kpi({ userId }) {
                     >
                         objectif
                     </text>
-
                     <Pie
                         data={radialData}
                         dataKey="value"
                         cx="50%"
                         cy="50%"
-                        innerRadius={70}
-                        outerRadius={80}
+                        innerRadius="60%"
+                        outerRadius="70%"
                         fill="#FF0000"
                         stroke="red"
                         startAngle={startAngle}
